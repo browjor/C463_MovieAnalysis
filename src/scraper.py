@@ -1,3 +1,6 @@
+#must use "pip install selenium", "pip install python-dotenv"
+#and install gecko on computer and make a .env file with the pack
+
 from dotenv import load_dotenv
 import os
 
