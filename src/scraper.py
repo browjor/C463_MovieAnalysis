@@ -5,11 +5,11 @@ from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 import time
-
+import config.personal_env
 # Setup Firefox options and path to geckodriver
 options = Options()
-options.add_argument("--headless")  # Run browser in headless mode (without opening a UI)
-service = Service("/path/to/geckodriver")  # Make sure this points to the location of your geckodriver
+#options.add_argument("--headless")  # Run browser in headless mode (without opening a UI)
+service = Service(config.personal_env.path)  # Make sure this points to the location of your geckodriver
 
 # Start a new Firefox browser session
 driver = webdriver.Firefox(service=service, options=options)
@@ -20,6 +20,7 @@ print(f"Page title: {driver.title}")
 
 # Example 2: Access an element by its ID and click a link
 downloads_link = driver.find_element(By.ID, "downloads")
+print(downloads_link)
 downloads_link.click()
 
 # Example 3: Find elements using CSS selectors
