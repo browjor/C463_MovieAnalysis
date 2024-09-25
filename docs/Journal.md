@@ -1,5 +1,9 @@
 # Journal Entries
 
+### Work Completed So Far:
+- Cemented what our project idea was
+- Began working on scraper
+
 ## Week of: 9/23/2024
 ### JRB:
 ### EG:
