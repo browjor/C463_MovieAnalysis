@@ -1,6 +1,6 @@
 #must use "pip install selenium", "pip install python-dotenv"
 #and install gecko on computer and make a .env file with the pack
-
+from doctest import master
 
 from dotenv import load_dotenv
 import os
@@ -39,36 +39,35 @@ pageReviewList = [] #Store reviews from each page here
 for review in reviewList:
     pageReviewList.append(review.text) #Add reviews to array
 
+tempInt = 0
 for review in pageReviewList:
-    temp = []
     if "★★★★★" in review:
-        masterList[review] = ("5")
+        masterList.append("5")
     elif "★★★★½" in review:
-        masterList[review] = ("4.5")
+        masterList.append("4.5")
     elif "★★★★" in review:
-        masterList[review] = ("4")
+        masterList.append("4")
     elif "★★★½" in review:
-        masterList[review] = ("3.5")
+        masterList.append("3.5")
     elif "★★★" in review:
-        masterList[review] = ("3")
+        masterList.append("3")
     elif "★★½" in review:
-        masterList[review] = ("2.5")
+        masterList.append("2.5")
     elif "★★" in review:
-        masterList[review] = ("2")
+        masterList.append("2")
     elif "★½" in review:
-        masterList[review] = ("1.5")
+        masterList.append("1.5")
+    elif "½" in review:
+        masterList.append("0.5")
     else:
-        masterList[review] = ("0.5")
+        masterList.append("No Rating")
+
+    index1 = review.find("by")
+    masterList.append(review[index1 + 3:])
 
 
-
-
-
-fknsnckldsnkjdsfksnfvkjs
-
-
-
-    print(masterList[review])
+    print(masterList[tempInt])
     print("")
+    tempInt += 1
 
 driver.quit()
