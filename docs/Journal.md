@@ -11,7 +11,7 @@
 ### EG: 
 - Made progress on scraper, improving the format of the collected data. Also discussed how the final scraper should work.
 ### AC:
-
+- Sorted through scholarly articles directly relating to the project. Provided the best possible literature links that portray surpervised machine learning sentiment analysis.
 
 ## Week of: 9/30/2024
 ### JRB:
