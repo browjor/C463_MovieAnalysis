@@ -5,8 +5,10 @@
 - Began working on scraper
 
 ## Week of: 9/23/2024
-### JRB:
-### EG: Made progress on scraper, improving the format of the collected data. Also discussed how the final scraper should work.
+- The group met on 9/25 to further plan the project and to try to complete the scraper.
+### JRB: 
+- Worked on the scraper and used the scraper to gather data, developed script to turn messy output from scraper into clean output from file.
+### EG:
 ### AC:
 
 
