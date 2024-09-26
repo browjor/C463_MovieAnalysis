@@ -48,15 +48,16 @@ def append_to_csv(file_path, data_list):
 
 
 get_page_string = ""
-rating_directory = [0.5,1,1.5,2,2.5,3,3.5,4,4.0,4.5,5]
+rating_directory = [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5]
 pageReviewList = []
 still_have_reviews = True
 
 
 for rating in rating_directory:
     page = 1
+    still_have_reviews = True
     while still_have_reviews:
-        if len(masterList) == 500:
+        if len(masterList) > 300:
             append_to_csv('output.csv', masterList)
             print(masterList)
             masterList = []
@@ -77,6 +78,9 @@ for rating in rating_directory:
         time.sleep(3 + random.randint(2,4))
         try:
             reviewList = driver.find_elements(By.CLASS_NAME, "film-detail")
+            if len(reviewList) == 0:
+                still_have_reviews = False
+                continue
         except NoSuchElementException:
             print("No elements found with the specified class name.")
             still_have_reviews = False
@@ -96,7 +100,7 @@ for rating in rating_directory:
             continue
         page += 1
         for review in reviewList:
-            pageReviewList.append(review.text)
+            masterList.append(review.text)
         time.sleep(2)
 
 driver.quit()
