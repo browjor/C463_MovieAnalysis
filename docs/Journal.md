@@ -6,7 +6,7 @@
 
 ## Week of: 9/23/2024
 ### JRB:
-### EG:
+### EG: Made progress on scraper, improving the format of the collected data. Also discussed how the final scraper should work. 
 ### AC:
 
 
