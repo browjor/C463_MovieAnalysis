@@ -1,4 +1,5 @@
 import re
+import os
 #the output file uses quotes " to separate reviews
 #some of the reviews have quotes within, which when put into the output file appear as ""
 #to read back file in list, when splitting via ", this would cause problems, so "" was replaced with ∥
@@ -17,7 +18,7 @@ pattern_like_number = r'^(\d{1,3})\s+like[s]?'
 master_review_list = []
 single_review = []
 temp_string = ""
-with open('C:\\Users\\johnb\\PycharmProjects\\C463_MovieAnalysis\\src\\output.csv','r', encoding='utf-8') as file:
+with open(os.getcwd()+'\\output.csv','r', encoding='utf-8') as file:
     while True:
         line = file.readline()
         if not line:
@@ -60,6 +61,4 @@ with open('C:\\Users\\johnb\\PycharmProjects\\C463_MovieAnalysis\\src\\output.cs
 
 print(len(master_review_list))
 
-for list in master_review_list:
-    print(list)
 

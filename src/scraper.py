@@ -58,7 +58,7 @@ for rating in rating_directory:
     still_have_reviews = True
     while still_have_reviews:
         if len(masterList) > 300:
-            append_to_csv('output.csv', masterList)
+            append_to_csv('output1.csv', masterList)
             print(masterList)
             masterList = []
         if page == 1:
