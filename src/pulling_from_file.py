@@ -18,7 +18,7 @@ pattern_like_number = r'^(\d{1,3})\s+like[s]?'
 master_review_list = []
 single_review = []
 temp_string = ""
-with open(os.getcwd()+'\\output.csv','r', encoding='utf-8') as file:
+with open(os.getcwd()+'\\output.txt','r', encoding='utf-8') as file:
     while True:
         line = file.readline()
         if not line:
@@ -58,7 +58,54 @@ with open(os.getcwd()+'\\output.csv','r', encoding='utf-8') as file:
                 master_review_list.append(single_review)
 
 
+"""for i in list:
+    print(master_review_list[i])"""
 
-print(len(master_review_list))
+halfStarCount = 0
+oneStarCount = 0
+oneAndHalfStarCount = 0
+twoStarCount = 0
+twoAndHalfStarCount = 0
+threeStarCount = 0
+threeAndHalfStarCount = 0
+fourStarCount = 0
+fourAndHalfStarCount = 0
+fiveStarCount = 0
+
+'''Get number of each star rating in list'''
+for review in master_review_list:
+    if "★★★★★" in review:
+        fiveStarCount += 1
+    elif "★★★★½" in review:
+        fourAndHalfStarCount += 1
+    elif "★★★★" in review:
+        fourStarCount += 1
+    elif "★★★½" in review:
+        threeAndHalfStarCount += 1
+    elif "★★★" in review:
+        threeStarCount += 1
+    elif "★★½" in review:
+        twoAndHalfStarCount += 1
+    elif "★★" in review:
+        twoStarCount += 1
+    elif "★½" in review:
+        oneAndHalfStarCount += 1
+    elif "★" in review:
+        oneStarCount += 1
+    else:
+        halfStarCount += 1
+
+print ("5-Star Reviews   " + str(fiveStarCount))
+print ("4.5-Star Reviews " + str(fourAndHalfStarCount))
+print ("4-Star Reviews   " + str(fourStarCount))
+print ("3.5-Star Reviews " + str(threeAndHalfStarCount))
+print ("3-Star Reviews   " + str(threeStarCount))
+print ("2.5-Star Reviews " + str(twoAndHalfStarCount))
+print ("2-Star Reviews   " + str(twoStarCount))
+print ("1.5-Star Reviews " + str(oneAndHalfStarCount))
+print ("1-Star Reviews   " + str(oneStarCount))
+print ("0.5-Star Reviews " + str(halfStarCount))
+
+#print(master_review_list)
 
 
