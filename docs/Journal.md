@@ -16,6 +16,7 @@
 ## Week of: 9/30/2024
 ### JRB:
 ### EG:
+- Now that we collected some data, we discussed the next step. We determined that we should preprocess the data so that it can be used in WEKA.
 ### AC:
 
 
