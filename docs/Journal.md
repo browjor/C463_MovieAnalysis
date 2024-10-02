@@ -18,6 +18,7 @@
 ### EG:
 - Now that we collected some data, we discussed the next step. We determined that we should preprocess the data so that it can be used in WEKA.
 ### AC:
+![image](https://github.com/user-attachments/assets/df9f239d-0fd8-4cfb-8cfb-9cc7e5cad228)
 
 
 ## Week of: 10/7/2024
