@@ -1,5 +1,6 @@
 import re
 import os
+
 #the output file uses quotes " to separate reviews
 #some of the reviews have quotes within, which when put into the output file appear as ""
 #to read back file in list, when splitting via ", this would cause problems, so "" was replaced with ∥
@@ -57,55 +58,99 @@ with open(os.getcwd()+'\\output.txt','r', encoding='utf-8') as file:
                 single_review.append(temp_string)
                 master_review_list.append(single_review)
 
+def printList(someList):
+    for i in someList:
+        print(i)
 
-"""for i in list:
-    print(master_review_list[i])"""
+def getRatingCounts():
+    halfStarCount = 0
+    oneStarCount = 0
+    oneAndHalfStarCount = 0
+    twoStarCount = 0
+    twoAndHalfStarCount = 0
+    threeStarCount = 0
+    threeAndHalfStarCount = 0
+    fourStarCount = 0
+    fourAndHalfStarCount = 0
+    fiveStarCount = 0
 
-halfStarCount = 0
-oneStarCount = 0
-oneAndHalfStarCount = 0
-twoStarCount = 0
-twoAndHalfStarCount = 0
-threeStarCount = 0
-threeAndHalfStarCount = 0
-fourStarCount = 0
-fourAndHalfStarCount = 0
-fiveStarCount = 0
+    '''Get number of each star rating in list'''
+    for review in master_review_list:
+        if "★★★★★" in review:
+            fiveStarCount += 1
+        elif "★★★★½" in review:
+            fourAndHalfStarCount += 1
+        elif "★★★★" in review:
+            fourStarCount += 1
+        elif "★★★½" in review:
+            threeAndHalfStarCount += 1
+        elif "★★★" in review:
+            threeStarCount += 1
+        elif "★★½" in review:
+            twoAndHalfStarCount += 1
+        elif "★★" in review:
+            twoStarCount += 1
+        elif "★½" in review:
+            oneAndHalfStarCount += 1
+        elif "★" in review:
+            oneStarCount += 1
+        else:
+            halfStarCount += 1
 
-'''Get number of each star rating in list'''
-for review in master_review_list:
-    if "★★★★★" in review:
-        fiveStarCount += 1
-    elif "★★★★½" in review:
-        fourAndHalfStarCount += 1
-    elif "★★★★" in review:
-        fourStarCount += 1
-    elif "★★★½" in review:
-        threeAndHalfStarCount += 1
-    elif "★★★" in review:
-        threeStarCount += 1
-    elif "★★½" in review:
-        twoAndHalfStarCount += 1
-    elif "★★" in review:
-        twoStarCount += 1
-    elif "★½" in review:
-        oneAndHalfStarCount += 1
-    elif "★" in review:
-        oneStarCount += 1
-    else:
-        halfStarCount += 1
+    print ("5-Star Reviews:   " + str(fiveStarCount))
+    print ("4.5-Star Reviews: " + str(fourAndHalfStarCount))
+    print ("4-Star Reviews:   " + str(fourStarCount))
+    print ("3.5-Star Reviews: " + str(threeAndHalfStarCount))
+    print ("3-Star Reviews:   " + str(threeStarCount))
+    print ("2.5-Star Reviews: " + str(twoAndHalfStarCount))
+    print ("2-Star Reviews:   " + str(twoStarCount))
+    print ("1.5-Star Reviews: " + str(oneAndHalfStarCount))
+    print ("1-Star Reviews:   " + str(oneStarCount))
+    print ("0.5-Star Reviews: " + str(halfStarCount))
+    #END getRatingCounts
 
-print ("5-Star Reviews   " + str(fiveStarCount))
-print ("4.5-Star Reviews " + str(fourAndHalfStarCount))
-print ("4-Star Reviews   " + str(fourStarCount))
-print ("3.5-Star Reviews " + str(threeAndHalfStarCount))
-print ("3-Star Reviews   " + str(threeStarCount))
-print ("2.5-Star Reviews " + str(twoAndHalfStarCount))
-print ("2-Star Reviews   " + str(twoStarCount))
-print ("1.5-Star Reviews " + str(oneAndHalfStarCount))
-print ("1-Star Reviews   " + str(oneStarCount))
-print ("0.5-Star Reviews " + str(halfStarCount))
+'''def ratingToNum():
+    newList = master_review_list
+    tempNum = 0
+    for review in newList:
+        if "★★★★★" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+5:]
+        elif "★★★★½" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+5:]
+        elif "★★★★" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+4:]
+        elif "★★★½" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+4:]
+        elif "★★★" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+3:]
+        elif "★★½" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+ 3:]
+        elif "★★" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+2:]
+        elif "★½" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+2:]
+        elif "★" in review:
+            tempNum = review.find("★")
+            review = review[:tempNum] + review[tempNum+1:]
+        else:
+            tempNum = review.find("½")
+            review = review[:tempNum] + review[tempNum+1:]
+    return newList'''
 
-#print(master_review_list)
+
+#newList = ratingToNum()
+#getRatingCounts()
+
+printList(master_review_list)
+#printList(newList)
+
 
 
