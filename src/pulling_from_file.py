@@ -1,5 +1,6 @@
 import re
 import os
+from word_cleaning import *
 #the output file uses quotes " to separate reviews
 #some of the reviews have quotes within, which when put into the output file appear as ""
 #to read back file in list, when splitting via ", this would cause problems, so "" was replaced with ∥
@@ -18,7 +19,7 @@ pattern_like_number = r'^(\d{1,3})\s+like[s]?'
 master_review_list = []
 single_review = []
 temp_string = ""
-with open(os.getcwd()+'\\output.txt','r', encoding='utf-8') as file:
+with open(os.getcwd()+'\\output.csv','r', encoding='utf-8') as file:
     while True:
         line = file.readline()
         if not line:
@@ -58,54 +59,57 @@ with open(os.getcwd()+'\\output.txt','r', encoding='utf-8') as file:
                 master_review_list.append(single_review)
 
 
-"""for i in list:
-    print(master_review_list[i])"""
-
-halfStarCount = 0
-oneStarCount = 0
-oneAndHalfStarCount = 0
-twoStarCount = 0
-twoAndHalfStarCount = 0
-threeStarCount = 0
-threeAndHalfStarCount = 0
-fourStarCount = 0
-fourAndHalfStarCount = 0
-fiveStarCount = 0
 
 '''Get number of each star rating in list'''
 for review in master_review_list:
-    if "★★★★★" in review:
-        fiveStarCount += 1
-    elif "★★★★½" in review:
-        fourAndHalfStarCount += 1
-    elif "★★★★" in review:
-        fourStarCount += 1
-    elif "★★★½" in review:
-        threeAndHalfStarCount += 1
-    elif "★★★" in review:
-        threeStarCount += 1
-    elif "★★½" in review:
-        twoAndHalfStarCount += 1
-    elif "★★" in review:
-        twoStarCount += 1
-    elif "★½" in review:
-        oneAndHalfStarCount += 1
-    elif "★" in review:
-        oneStarCount += 1
+    if "★★★★★" in review[0]:
+        review[0] = 10
+    elif "★★★★½" in review[0]:
+        review[0] =9
+    elif "★★★★" in review[0]:
+        review[0] = 8
+    elif "★★★½" in review[0]:
+        review[0] = 7
+    elif "★★★" in review[0]:
+        review[0] = 6
+    elif "★★½" in review[0]:
+        review[0] = 5
+    elif "★★" in review[0]:
+        review[0] = 4
+    elif "★½" in review[0]:
+        review[0] = 3
+    elif "★" in review[0]:
+        review[0] = 2
     else:
-        halfStarCount += 1
+        review[0] = 1
 
-print ("5-Star Reviews   " + str(fiveStarCount))
-print ("4.5-Star Reviews " + str(fourAndHalfStarCount))
-print ("4-Star Reviews   " + str(fourStarCount))
-print ("3.5-Star Reviews " + str(threeAndHalfStarCount))
-print ("3-Star Reviews   " + str(threeStarCount))
-print ("2.5-Star Reviews " + str(twoAndHalfStarCount))
-print ("2-Star Reviews   " + str(twoStarCount))
-print ("1.5-Star Reviews " + str(oneAndHalfStarCount))
-print ("1-Star Reviews   " + str(oneStarCount))
-print ("0.5-Star Reviews " + str(halfStarCount))
+counter = 0
+rating = 0
+new_output_list = []
 
-#print(master_review_list)
+for i in range(1,11):
+    counter = 0
+    rating += 1
+    for review in master_review_list:
+        if review[0] == rating and counter <144:
+            new_output_list.append(review)
+            counter += 1
+
+processed_list = []
+for review in new_output_list:
+    processed_list.append((review[0],string_preprocessing(review[4])))
+
+for review in processed_list:
+    print(str(review) + '\n')
+
+#still have to remove "spoiler" and "more" (for last part of string)
+
+
+#with open('clean_output.txt','w',encoding='utf-8') as file:
+#    for review in new_output_list:
+#        file.write(str(review[0])+' ' + str(review[4])+ '\n')
+
+
+
 
 
