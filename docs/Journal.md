@@ -22,12 +22,15 @@
 
 
 ## Week of: 10/7/2024
+Group met and worked on preprocessing of review text. 
 ### JRB:
 ### EG:
 ### AC:
 
 
 ## Week of: 10/14/2024
+As a group, decided to change the film reviews from Back to the Future to Megalopolis(2024). There are many more reviews and they are more distributed throughout the ratings.
+With the current programs, the switch is relatively easy and data has been collected for Megalopolis. 
 ### JRB:
 ### EG:
 ### AC:
