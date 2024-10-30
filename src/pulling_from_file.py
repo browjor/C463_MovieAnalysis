@@ -1,6 +1,7 @@
-import re
+
 import os
-from word_cleaning import *
+import re
+from example_word_cleaning import *
 #the output file uses quotes " to separate reviews
 #some of the reviews have quotes within, which when put into the output file appear as ""
 #to read back file in list, when splitting via ", this would cause problems, so "" was replaced with ∥
@@ -87,27 +88,30 @@ counter = 0
 rating = 0
 new_output_list = []
 
-for i in range(1,11):
-    counter = 0
-    rating += 1
-    for review in master_review_list:
-        if review[0] == rating and counter <144:
-            new_output_list.append(review)
-            counter += 1
+#for i in range(1,11):
+#    counter = 0
+#    rating += 1
+#    for review in master_review_list:
+#        if review[0] == rating and counter <300:
+#            new_output_list.append(review)
+#            counter += 1
 
-processed_list = []
-for review in new_output_list:
-    processed_list.append((review[0],string_preprocessing(review[4])))
+#processed_list = []
+#for review in new_output_list:
+#    processed_list.append((review[0],string_preprocessing(review[4])))
 
-for review in processed_list:
-    print(str(review) + '\n')
+#for review in processed_list:
+#    print(str(review) + '\n')
 
 #still have to remove "spoiler" and "more" (for last part of string)
 
 
 #with open('clean_output.txt','w',encoding='utf-8') as file:
-#    for review in new_output_list:
+#    for review in master_review_list:
 #        file.write(str(review[0])+' ' + str(review[4])+ '\n')
+
+#for review in master_review_list:
+#    print(str(review[0])+' ' + str(review[4]) + '\n')
 
 
 
