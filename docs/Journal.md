@@ -49,6 +49,9 @@ With the current programs, the switch is relatively easy and data has been colle
 
 ![20241030_165849](https://github.com/user-attachments/assets/32b7c4eb-ceed-4c0c-bf84-808513da93cb)
 
+![SVM_with_idf_vec](https://github.com/user-attachments/assets/a32d7a92-dd33-485e-b35d-e4ffc0e56552)
+
+
 ### JRB:
 ### EG:
 ### AC:
