@@ -47,6 +47,8 @@ With the current programs, the switch is relatively easy and data has been colle
 - The goal of our project is to develop an AI model that will classify Letterboxd reviews for the 2024 movie Megalopolis into three separate sentiment categories, neutral, positive, and negative. Our AI model will take a review as an input and output a sentiment. To train our model, we will use pairs of data consisting of a text review and a star rating (1-10). The star rating will be transformed to a positive, neutral, or negative integer based on an arbitrary range. For example, 1-2 stars for negative sentiment, 3-7 stars for neutral sentiment, 8-10 stars for positive sentiment. For a baseline, we will predict the most frequent class. For an oracle, we will manually classify a random sampling of reviews and choose what sentiment they are. 
 - As our problem falls into the area of sentiment analysis through supervised learning, we have chosen the SVM (Support Vector Machine) model to handle this multiclass classification task. We plan on cleaning, preprocessing our textual data, vectorizing the review text, and then training the SVM model with our training data. We then judge its accuracy by measuring the sentiment in test data against the star rating, our baselines, and then oracles.
 
+![20241030_165849](https://github.com/user-attachments/assets/32b7c4eb-ceed-4c0c-bf84-808513da93cb)
+
 ### JRB:
 ### EG:
 ### AC:
