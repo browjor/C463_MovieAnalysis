@@ -2,6 +2,9 @@ import os, csv
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
+import numpy as np
+from collections import Counter
+
 
 
 training_set = []
@@ -25,11 +28,17 @@ with open(os.getcwd()+'\\clean_testing.csv','r') as file:
         testing_set_strings.append(row[1])
         testing_set_ratings.append(row[0])
 
-# Initialize the TfidfVectorizer
-vectorizer = TfidfVectorizer(use_idf=True)
+#majority_class = Counter(training_set_ratings).most_common(1)[0][0]
+#majority_predictions = [majority_class] * len(testing_set_ratings)
+#print("Classification report for majority classifier:")
+#print(classification_report(testing_set_ratings, majority_predictions))
 
-training_tfidf = vectorizer.fit_transform(training_set_strings)
-testing_tfidf = vectorizer.transform(testing_set_strings)
+
+# Initialize the TfidfVectorizer
+vectorizer = TfidfVectorizer(ngram_range=(1,3),use_idf=True, max_features=75000, min_df=2, max_df=0.75)
+
+training_tfidf = vectorizer.fit_transform(training_set_strings).astype(np.float32)
+testing_tfidf = vectorizer.transform(testing_set_strings).astype(np.float32)
 
 n_features = training_tfidf.shape[1]
 X_var = training_tfidf.toarray().var()
@@ -37,29 +46,22 @@ X_var = training_tfidf.toarray().var()
 default_gamma = 1 / (n_features * X_var)
 print("Default gamma:", default_gamma)
 
-svm_model = SVC(kernel="rbf", gamma=0.01, random_state=42, class_weight="balanced")
+svm_model = SVC(kernel="linear", random_state=42, class_weight="balanced")
 svm_model.fit(training_tfidf, training_set_ratings)
 testing_predictions = svm_model.predict(testing_tfidf)
 
 print("Classification Report for SVC \n"
-      "- RBF Kernel- Gamma 0.01 -with Balanced Class Weights")
+      "- Linear Kernel -with Balanced Class Weights \n"
+      "- Using 1,3 ngram and tfidf vectorizer - Max 75000 features as float32 ")
 print(classification_report(testing_set_ratings, testing_predictions))
 print("\n")
 
-svm_model = SVC(kernel="rbf", gamma=0.1, random_state=42, class_weight="balanced")
+svm_model = SVC(kernel="rbf", random_state=42, class_weight="balanced")
 svm_model.fit(training_tfidf, training_set_ratings)
 testing_predictions = svm_model.predict(testing_tfidf)
 
 print("Classification Report for SVC \n"
-      "- RBF Kernel- Gamma 0.1 -with Balanced Class Weights")
-print(classification_report(testing_set_ratings, testing_predictions))
-print("\n")
-
-svm_model = SVC(kernel="rbf", gamma=10, random_state=42, class_weight="balanced")
-svm_model.fit(training_tfidf, training_set_ratings)
-testing_predictions = svm_model.predict(testing_tfidf)
-
-print("Classification Report for SVC \n"
-      "- RBF Kernel- Gamma 10 -with Balanced Class Weights")
+      "- RBF Kernel -with Balanced Class Weights \n"
+      "- Using 1,3 ngram and tfidf vectorizer - Max 75000 features as float32 ")
 print(classification_report(testing_set_ratings, testing_predictions))
 print("\n")

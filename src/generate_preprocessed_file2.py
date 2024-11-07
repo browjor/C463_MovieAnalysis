@@ -101,7 +101,7 @@ with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
             new_string = ""
             for word in listy2:
                 word = word.strip()
-                if len(word)<2:
+                if len(word)<=2:
                     continue
                 if word in stop_words:
                     continue
@@ -111,7 +111,8 @@ with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
                 if word in wordnet_words:
                     new_string += word + ' '
             if len(new_string) != 0:
-                preprocessed_data.append([rating,new_string])
+                preprocessed_data.append([rating,new_string.strip()])
+
 
 
 #randomizing selections and writing train, test, human_oracle to file
