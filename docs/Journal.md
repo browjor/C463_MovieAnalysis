@@ -101,10 +101,15 @@ Achieved slightly better results
 ##### New Approach - Use tf-idf vectorizor in combination with n-grams:
 - To capture some semantic relationships other than just term frequency, tf-idf can be used with n-gram. This was easy to set up, just a parameter in the sklearn TfidfVectorizer, but fully capturing 1,2 ngrams led to roughly 155000 features for the transformed dataset, which led to a numpy memory error that said 22 GB of RAM were required. Luckily, another parameter in the vectorizer is the maximum number of features. Here's two tests with the top (most influential) 50000 features and 250000 features, for a linear and rbf kernel.
 - 50000 features:
+
  ![image](https://github.com/user-attachments/assets/39795f2b-bd9d-45ce-860a-94048241ae21)
+ 
  ![image](https://github.com/user-attachments/assets/ea924df2-c93b-47aa-bfb9-edae820b8dc1)
+ 
 - 25000 features:
+
 ![image](https://github.com/user-attachments/assets/0fe1fe0c-fe12-4015-99ed-5d729cd8085a)
+
 ![image](https://github.com/user-attachments/assets/e24cecfc-a0e8-4672-92a3-2726de1440bc)
 
 
