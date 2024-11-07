@@ -85,12 +85,18 @@ Achieved slightly better results
 ##### Altering the kernel to be non-linear:
 [Plot classification boundaries with different SVM Kernels](https://scikit-learn.org/dev/auto_examples/svm/plot_svm_kernels.html#sphx-glr-auto-examples-svm-plot-svm-kernels-py)
 
+![image](https://github.com/user-attachments/assets/de7129c8-2052-449e-8f9d-d51696c3636b)
 
+##### Experimenting with gamma
+- "gamma plays a crucial role in defining the behavior of the decision boundary. It can be seen as the inverse of the radius of influence of samples selected by the model as support vectors. Intuitively, a low gamma value means that the influence of a single training example reaches far, affecting a larger region of the feature space. Conversely, a high gamma value means that the influence is close, affecting only the region near the training example"
+- The gamma for the previous example is:  1 / (n_features * X. var()) as value of gamma, - if 'auto', uses 1 / n_features - if float, must be non-negative (from sklearn.svm documentation) After these calculations, the gamma used is roughly 1.
+- Will try for gamma of 0.01, 0.1, and 10, just for boundaries.
 
+  ![image](https://github.com/user-attachments/assets/9675d99d-fab7-4a4d-bfff-d8152e50e1b8)
 
+  ![image](https://github.com/user-attachments/assets/7b68af6f-4fc4-4993-a419-f6e11022f070)
 
-
-
+  ![image](https://github.com/user-attachments/assets/a5dbc1b3-07fe-43f2-ba25-451ed933890f)
 
 ### JRB:
 ### EG:
