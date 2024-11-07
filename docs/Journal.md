@@ -70,17 +70,23 @@ Achieved slightly better results
 
 ![image](https://github.com/user-attachments/assets/5bd0d895-5152-4b3c-b43c-3a042e29be96)
 
-After changing regularization parameter:
-"Regularization adds a penalty term to the standard loss function that a machine learning model minimizes during training. This penalty encourages the model to keep its parameters (like weights in neural networks or coefficients in regression models) small, which can help prevent overfitting"
-In our case, there is extremely little difference in changing this parameter, as seen:
+##### After changing regularization parameter:
+- "Regularization adds a penalty term to the standard loss function that a machine learning model minimizes during training. This penalty encourages the model to keep its parameters (like weights in neural networks or coefficients in regression models) small, which can help prevent overfitting"
+- In our case, there is extremely little difference in changing this parameter, as seen:
 
 ![image](https://github.com/user-attachments/assets/a18734dd-5e99-4d0c-9707-35d01a5585fb)
 
 ![image](https://github.com/user-attachments/assets/53847513-5bfb-4037-90ee-ff67194316b6)
 
-After changing to balanced class weights:
+##### After changing to balanced class weights:
 
 ![image](https://github.com/user-attachments/assets/c3c7d881-fcbf-49af-9dc0-24624162b384)
+
+##### Altering the kernel to be non-linear:
+[Plot classification boundaries with different SVM Kernels](https://scikit-learn.org/dev/auto_examples/svm/plot_svm_kernels.html#sphx-glr-auto-examples-svm-plot-svm-kernels-py)
+
+
+
 
 
 
