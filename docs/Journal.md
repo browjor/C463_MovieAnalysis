@@ -62,6 +62,12 @@ Reworked preprocessing, used WordNet as dictionary to compare words in reviews a
 *work is in generate_preprocessed_file2.py
 Achieved slightly better results
 
+######  Baseline - Simple Majority Classifier:
+- Predicted every feature of the data as "neutral" (the majority class)
+
+![image](https://github.com/user-attachments/assets/4dfc3b44-ace6-47bd-a1f4-47d598e6c3af)
+
+
 ###### Explanation of precision, recall, and f1 score:
 - Precision: Percentage of correct positive predictions relative to total positive predictions
 - Recall: Percentage of correct positive predictions relative to total actual positives
