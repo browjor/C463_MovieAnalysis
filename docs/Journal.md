@@ -61,6 +61,12 @@ With the current programs, the switch is relatively easy and data has been colle
 Reworked preprocessing, used WordNet as dictionary to compare words in reviews against
 *work is in generate_preprocessed_file2.py
 Achieved slightly better results
+
+Explanation of precision, recall, and f1 score:
+Precision: Percentage of correct positive predictions relative to total positive predictions
+Recall: Percentage of correct positive predictions relative to total actual positives
+F1 Score: Weighted harmonic mean of precision and recall, 1 is the best
+Support: How many of each class are in the dataset
 ![image](https://github.com/user-attachments/assets/5bd0d895-5152-4b3c-b43c-3a042e29be96)
 
 After changing regularization parameter:
