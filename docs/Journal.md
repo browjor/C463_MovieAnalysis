@@ -58,6 +58,12 @@ With the current programs, the switch is relatively easy and data has been colle
 
 
 ## Week of: 11/4/2024
+Reworked preprocessing, used WordNet as dictionary to compare words in reviews against
+*work is in generate_preprocessed_file2.py
+Achieved slightly better results
+![image](https://github.com/user-attachments/assets/5bd0d895-5152-4b3c-b43c-3a042e29be96)
+
+
 ### JRB:
 ### EG:
 ### AC:
