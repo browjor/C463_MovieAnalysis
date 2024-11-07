@@ -62,11 +62,12 @@ Reworked preprocessing, used WordNet as dictionary to compare words in reviews a
 *work is in generate_preprocessed_file2.py
 Achieved slightly better results
 
-Explanation of precision, recall, and f1 score:
-Precision: Percentage of correct positive predictions relative to total positive predictions
-Recall: Percentage of correct positive predictions relative to total actual positives
-F1 Score: Weighted harmonic mean of precision and recall, 1 is the best
-Support: How many of each class are in the dataset
+###### Explanation of precision, recall, and f1 score:
+- Precision: Percentage of correct positive predictions relative to total positive predictions
+- Recall: Percentage of correct positive predictions relative to total actual positives
+- F1 Score: Weighted harmonic mean of precision and recall, 1 is the best
+- Support: How many of each class are in the dataset
+
 ![image](https://github.com/user-attachments/assets/5bd0d895-5152-4b3c-b43c-3a042e29be96)
 
 After changing regularization parameter:
@@ -76,6 +77,12 @@ In our case, there is extremely little difference in changing this parameter, as
 ![image](https://github.com/user-attachments/assets/a18734dd-5e99-4d0c-9707-35d01a5585fb)
 
 ![image](https://github.com/user-attachments/assets/53847513-5bfb-4037-90ee-ff67194316b6)
+
+After changing to balanced class weights:
+
+![image](https://github.com/user-attachments/assets/c3c7d881-fcbf-49af-9dc0-24624162b384)
+
+
 
 
 
