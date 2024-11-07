@@ -28,15 +28,38 @@ with open(os.getcwd()+'\\clean_testing.csv','r') as file:
 # Initialize the TfidfVectorizer
 vectorizer = TfidfVectorizer(use_idf=True)
 
-# Fit and transform the corpus to create the TF-IDF matrix
 training_tfidf = vectorizer.fit_transform(training_set_strings)
 testing_tfidf = vectorizer.transform(testing_set_strings)
 
-svm_model = SVC(kernel="linear", random_state=42)
-svm_model.fit(training_tfidf, training_set_ratings)
+n_features = training_tfidf.shape[1]
+X_var = training_tfidf.toarray().var()
+# Default gamma calculation
+default_gamma = 1 / (n_features * X_var)
+print("Default gamma:", default_gamma)
 
+svm_model = SVC(kernel="rbf", gamma=0.01, random_state=42, class_weight="balanced")
+svm_model.fit(training_tfidf, training_set_ratings)
 testing_predictions = svm_model.predict(testing_tfidf)
 
+print("Classification Report for SVC \n"
+      "- RBF Kernel- Gamma 0.01 -with Balanced Class Weights")
 print(classification_report(testing_set_ratings, testing_predictions))
+print("\n")
 
+svm_model = SVC(kernel="rbf", gamma=0.1, random_state=42, class_weight="balanced")
+svm_model.fit(training_tfidf, training_set_ratings)
+testing_predictions = svm_model.predict(testing_tfidf)
 
+print("Classification Report for SVC \n"
+      "- RBF Kernel- Gamma 0.1 -with Balanced Class Weights")
+print(classification_report(testing_set_ratings, testing_predictions))
+print("\n")
+
+svm_model = SVC(kernel="rbf", gamma=10, random_state=42, class_weight="balanced")
+svm_model.fit(training_tfidf, training_set_ratings)
+testing_predictions = svm_model.predict(testing_tfidf)
+
+print("Classification Report for SVC \n"
+      "- RBF Kernel- Gamma 10 -with Balanced Class Weights")
+print(classification_report(testing_set_ratings, testing_predictions))
+print("\n")
