@@ -62,6 +62,12 @@ Reworked preprocessing, used WordNet as dictionary to compare words in reviews a
 *work is in generate_preprocessed_file2.py
 Achieved slightly better results
 
+######  Baseline - Simple Majority Classifier:
+- Predicted every feature of the data as "neutral" (the majority class)
+
+![image](https://github.com/user-attachments/assets/4dfc3b44-ace6-47bd-a1f4-47d598e6c3af)
+
+
 ###### Explanation of precision, recall, and f1 score:
 - Precision: Percentage of correct positive predictions relative to total positive predictions
 - Recall: Percentage of correct positive predictions relative to total actual positives
@@ -97,6 +103,29 @@ Achieved slightly better results
   ![image](https://github.com/user-attachments/assets/7b68af6f-4fc4-4993-a419-f6e11022f070)
 
   ![image](https://github.com/user-attachments/assets/a5dbc1b3-07fe-43f2-ba25-451ed933890f)
+
+##### New Approach - Use tf-idf vectorizor in combination with n-grams:
+- To capture some semantic relationships other than just term frequency, tf-idf can be used with n-gram. This was easy to set up, just a parameter in the sklearn TfidfVectorizer, but fully capturing 1,2 ngrams led to roughly 155000 features for the transformed dataset, which led to a numpy memory error that said 22 GB of RAM were required. Luckily, another parameter in the vectorizer is the maximum number of features. Here's two tests with the top (most influential) 50000 features and 250000 features, for a linear and rbf kernel.
+- 50000 features:
+
+ ![image](https://github.com/user-attachments/assets/39795f2b-bd9d-45ce-860a-94048241ae21)
+ 
+ ![image](https://github.com/user-attachments/assets/ea924df2-c93b-47aa-bfb9-edae820b8dc1)
+ 
+- 25000 features:
+
+![image](https://github.com/user-attachments/assets/0fe1fe0c-fe12-4015-99ed-5d729cd8085a)
+
+![image](https://github.com/user-attachments/assets/e24cecfc-a0e8-4672-92a3-2726de1440bc)
+
+- Trying with 75000 features and converting the float 64 arrays to float 32 arrays
+
+![image](https://github.com/user-attachments/assets/4ee6108f-a22a-4da5-8fed-709b24d20355)
+
+![image](https://github.com/user-attachments/assets/b3dff6ab-85ac-41a4-90ab-cd78a773a50a)
+
+Conclusion: Not a huge difference. 
+
 
 ### JRB:
 ### EG:
