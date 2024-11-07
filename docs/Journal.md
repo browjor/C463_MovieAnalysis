@@ -118,7 +118,13 @@ Achieved slightly better results
 
 ![image](https://github.com/user-attachments/assets/e24cecfc-a0e8-4672-92a3-2726de1440bc)
 
+- Trying with 75000 features and converting the float 64 arrays to float 32 arrays
 
+![image](https://github.com/user-attachments/assets/4ee6108f-a22a-4da5-8fed-709b24d20355)
+
+![image](https://github.com/user-attachments/assets/b3dff6ab-85ac-41a4-90ab-cd78a773a50a)
+
+Conclusion: Not a huge difference. 
 
 
 ### JRB:
