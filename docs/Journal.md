@@ -136,6 +136,7 @@ Conclusion: Not a huge difference.
 ### JRB:
 ### EG: Experimented with changing the boundaries for positive, neutral, and negative reviews. When I changed it to a more extreme approach, I saw a slight improvement in the accuracy of the model. The previous best was 52%, and I got 53%.
 ![Screenshot 2024-11-13 161355](https://github.com/user-attachments/assets/af747d07-4993-4e0d-9272-8bb5da5492a4)
+
 (Note: The image says it uses balanced class weights, but it actually used extreme weights.)
 
 ### AC:
