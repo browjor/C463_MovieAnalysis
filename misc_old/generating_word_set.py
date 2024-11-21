@@ -1,9 +1,8 @@
 
 import os
-from example_word_cleaning import remove_characters_make_lowercase
+from misc_old.example_word_cleaning import remove_characters_make_lowercase
 import re
 
-import nltk
 from nltk.corpus import words, stopwords
 
 

@@ -1,7 +1,7 @@
 
 import os
 import re
-from example_word_cleaning import *
+
 #the output file uses quotes " to separate reviews
 #some of the reviews have quotes within, which when put into the output file appear as ""
 #to read back file in list, when splitting via ", this would cause problems, so "" was replaced with ∥

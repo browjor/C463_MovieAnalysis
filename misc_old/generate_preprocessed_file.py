@@ -1,66 +1,11 @@
+from generating_word_set import return_word_set
+from misc_old.example_word_cleaning import remove_characters_make_lowercase
 import os
 import pandas as pd
-import re
-import nltk
-from nltk.corpus import wordnet, stopwords
-
-# Download WordNet and load its vocabulary
-nltk.download('wordnet')
-nltk.download('stopwords')
-wordnet_words = set(word.name().split('.')[0] for word in wordnet.all_synsets())
-stop_words = set(stopwords.words('english'))
-proper_noun_list = movie_details = [
-    "Megalopolis 2024",
-    "Cesar Catilina",
-    "Mayor Franklyn Cicero",
-    "Julia Cicero",
-    "Clodio Pulcher",
-    "Hamilton Crassus III",
-    "Wow Platinum",
-    "Fundi Romaine",
-    "Jason Zanderz",
-    "Teresa Cicero",
-    "Vesta Sweetwater",
-    "Constance Crassus Catilina",
-    "Clodia Pulcher",
-    "Charles Cothope",
-    "Commissioner Stanley Hart",
-    "Nush 'The Fixer' Berman",
-    "Laurence Fishburne",      # Cast for Fundi Romaine
-    "Jason Schwartzman",       # Cast for Jason Zanderz
-    "Kathryn Hunter",          # Cast for Teresa Cicero
-    "Grace VanderWaal",        # Cast for Vesta Sweetwater
-    "Talia Shire",             # Cast for Constance Crassus Catilina
-    "Chloe Fineman",           # Cast for Clodia Pulcher
-    "James Remar",             # Cast for Charles Cothope
-    "D.B. Sweeney",            # Cast for Commissioner Stanley Hart
-    "Dustin Hoffman",          # Cast for Nush 'The Fixer' Berman
-    "Adam Driver",             # Additional cast
-    "Aubrey Plaza",            # Additional cast
-    "Shia LaBeouf",            # Additional cast
-    "Nathalie Emmanuel",       # Additional cast
-    "Jon Voight",              # Additional cast
-    "Forest Whitaker",         # Additional cast
-    "Francis Ford Coppola",    # Director
-    "Francis Ford Coppola",    # Producer
-    "megaflopolis"
-]
-
-for word in proper_noun_list:
-    word = word.lower()
-
-proper_noun_set = set(proper_noun_list)
-
+word_set = return_word_set()
 positive = 0
 negative = 0
 neutral = 0
-
-replace_with_space_1 = r'[\u0021-\u0040]'
-replace_with_space_2 = r'[\u005b-\u0060]'
-keep_1 = r'[^\sa-zA-Z\u1F600-\u1F64F]'
-space = r'[\u0041]{2,}'
-
-
 preprocessed_data = []
 with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
     while True:
@@ -89,28 +34,14 @@ with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
             #    rating = 'neutral'
             #elif 7 <= rating <= 10:
             #    rating = 'positive'
-            string = listy[1].strip('\n')
-            string = re.sub(replace_with_space_1, " ", string)
-            string = re.sub(replace_with_space_2, " ", string)
-            string = re.sub(space, " ", string)
-            string = re.sub(keep_1, "", string)
-            string = string.lower()
-            listy2 = string.split(" ")
+            string = remove_characters_make_lowercase(listy[1])
             new_string = ""
+            listy2 = string.split(" ")
             for word in listy2:
-                word = word.strip()
-                if len(word)<=2:
-                    continue
-                if word in stop_words:
-                    continue
-                if word in proper_noun_set:
-                    new_string += word + ' '
-                    continue
-                if word in wordnet_words:
-                    new_string += word + ' '
+                if word in word_set:
+                    new_string += word + " "
             if len(new_string) != 0:
-                preprocessed_data.append([rating,new_string.strip()])
-
+                preprocessed_data.append([rating,new_string])
 
 
 #randomizing selections and writing train, test, human_oracle to file
@@ -174,6 +105,7 @@ human_oracle_dataframe.to_csv(os.getcwd() + '\\for_human_oracle.csv', index=Fals
 training_dataframe.to_csv(os.getcwd() + '\\clean_training.csv', index=False)
 testing_dataframe.to_csv(os.getcwd() + '\\clean_testing.csv', index=False)
 human_oracle_dataframe.to_csv(os.getcwd() + '\\clean_human_oracle.csv', index=False)
+
 
 
 

@@ -3,6 +3,7 @@ import pandas as pd
 import re
 import nltk
 from nltk.corpus import wordnet, stopwords
+from nltk.stem.snowball import SnowballStemmer
 
 # Download WordNet and load its vocabulary
 nltk.download('wordnet')
@@ -53,13 +54,13 @@ proper_noun_set = set(proper_noun_list)
 
 positive = 0
 negative = 0
-neutral = 0
 
 replace_with_space_1 = r'[\u0021-\u0040]'
 replace_with_space_2 = r'[\u005b-\u0060]'
 keep_1 = r'[^\sa-zA-Z\u1F600-\u1F64F]'
 space = r'[\u0041]{2,}'
 
+stemmer = SnowballStemmer("english")
 
 preprocessed_data = []
 with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
@@ -73,13 +74,10 @@ with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
         else:
             rating = int(listy[0])
             #balanced, slightly more neutral
-            if 1 <= rating <= 3:
+            if 1 <= rating <= 5:
                 rating = 'negative'
                 negative += 1
-            elif 4 <= rating <= 7:
-                rating = 'neutral'
-                neutral += 1
-            elif 8 <= rating <= 10:
+            elif 6 <= rating <= 10:
                 rating = 'positive'
                 positive += 1
             # favors extremes
@@ -103,11 +101,13 @@ with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
                     continue
                 if word in stop_words:
                     continue
-                if word in proper_noun_set:
-                    new_string += word + ' '
+                if (word in proper_noun_set) or (word in wordnet_words):
+                    try:
+                        word = stemmer.stem(word)
+                        new_string += word + ' '
+                    except Exception as e:
+                        new_string += word + ' '
                     continue
-                if word in wordnet_words:
-                    new_string += word + ' '
             if len(new_string) != 0:
                 preprocessed_data.append([rating,new_string.strip()])
 
@@ -116,20 +116,16 @@ with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
 #randomizing selections and writing train, test, human_oracle to file
 negative = []
 positive = []
-neutral = []
 for datum in preprocessed_data:
     if datum[0] == 'negative':
         negative.append(datum)
     elif datum[0] == 'positive':
         positive.append(datum)
-    elif datum[0] == 'neutral':
-        neutral.append(datum)
     else:
         print("ERROR")
 
 negative_dataframe = pd.DataFrame(negative)
 positive_dataframe = pd.DataFrame(positive)
-neutral_dataframe = pd.DataFrame(neutral)
 
 train_negative_dataframe = negative_dataframe.sample(frac=0.72, random_state=1234, replace=False)
 negative_dataframe = negative_dataframe.drop(train_negative_dataframe.index)
@@ -149,31 +145,22 @@ print(len(test_positive_dataframe))
 humanOracle_positive_dataframe = positive_dataframe
 print(len(humanOracle_positive_dataframe))
 
-
-train_neutral_dataframe = neutral_dataframe.sample(frac=0.72, random_state=7456, replace=False)
-neutral_dataframe = neutral_dataframe.drop(train_neutral_dataframe.index)
-print(len(train_neutral_dataframe))
-test_neutral_dataframe = neutral_dataframe.sample(frac=0.892, random_state=1245, replace=False)
-neutral_dataframe = neutral_dataframe.drop(test_neutral_dataframe.index)
-print(len(test_neutral_dataframe))
-humanOracle_neutral_dataframe = neutral_dataframe
-print(len(humanOracle_neutral_dataframe))
-
-training_dataframe = pd.concat([train_negative_dataframe, train_positive_dataframe, train_neutral_dataframe], axis=0, ignore_index=True, verify_integrity=True)
+training_dataframe = pd.concat([train_negative_dataframe, train_positive_dataframe], axis=0, ignore_index=True, verify_integrity=True)
 print(len(training_dataframe))
-testing_dataframe = pd.concat([test_negative_dataframe, test_positive_dataframe, test_neutral_dataframe], axis=0, ignore_index=True, verify_integrity=True)
+testing_dataframe = pd.concat([test_negative_dataframe, test_positive_dataframe], axis=0, ignore_index=True, verify_integrity=True)
 print(len(testing_dataframe))
-human_oracle_dataframe = pd.concat([humanOracle_negative_dataframe, humanOracle_positive_dataframe, humanOracle_neutral_dataframe], axis=0, ignore_index=True, verify_integrity=True)
+human_oracle_dataframe = pd.concat([humanOracle_negative_dataframe, humanOracle_positive_dataframe], axis=0, ignore_index=True, verify_integrity=True)
 print(len(human_oracle_dataframe))
 
 training_dataframe = training_dataframe.sample(frac=1, random_state=7456, replace=False)
 testing_dataframe = testing_dataframe.sample(frac=1, random_state=1245, replace=False)
 human_oracle_dataframe = human_oracle_dataframe.sample(frac=1, random_state=1245, replace=False)
 
-human_oracle_dataframe.to_csv(os.getcwd() + '\\for_human_oracle.csv', index=False, columns=[1])
-training_dataframe.to_csv(os.getcwd() + '\\clean_training.csv', index=False)
-testing_dataframe.to_csv(os.getcwd() + '\\clean_testing.csv', index=False)
-human_oracle_dataframe.to_csv(os.getcwd() + '\\clean_human_oracle.csv', index=False)
+human_oracle_dataframe.to_csv(os.getcwd() + '\\for_human_oracle_posneg.csv', index=False, columns=[1])
+training_dataframe.to_csv(os.getcwd() + '\\clean_training_posneg.csv', index=False)
+testing_dataframe.to_csv(os.getcwd() + '\\clean_testing_posneg.csv', index=False)
+human_oracle_dataframe.to_csv(os.getcwd() + '\\clean_human_oracle_posneg.csv', index=False)
+
 
 
 

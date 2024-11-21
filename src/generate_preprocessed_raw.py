@@ -1,11 +1,17 @@
-from generating_word_set import return_word_set
-from example_word_cleaning import remove_characters_make_lowercase
 import os
 import pandas as pd
-word_set = return_word_set()
+import re
+
 positive = 0
 negative = 0
 neutral = 0
+
+replace_with_space_1 = r'[\u0021-\u0040]'
+replace_with_space_2 = r'[\u005b-\u0060]'
+keep_1 = r'[^\sa-zA-Z\u1F600-\u1F64F]'
+space = r'[\u0041]{2,}'
+
+
 preprocessed_data = []
 with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
     while True:
@@ -34,14 +40,23 @@ with open(os.getcwd() + '\\clean_output.txt', 'r', encoding='utf-8') as file:
             #    rating = 'neutral'
             #elif 7 <= rating <= 10:
             #    rating = 'positive'
-            string = remove_characters_make_lowercase(listy[1])
-            new_string = ""
+            string = listy[1].strip('\n')
+            string = re.sub(replace_with_space_1, " ", string)
+            string = re.sub(replace_with_space_2, " ", string)
+            string = re.sub(space, " ", string)
+            string = re.sub(keep_1, "", string)
+            string = string.lower()
             listy2 = string.split(" ")
+            new_string = ""
             for word in listy2:
-                if word in word_set:
+                word = word.strip()
+                if len(word)<=2:
+                    continue
+                else:
                     new_string += word + " "
             if len(new_string) != 0:
-                preprocessed_data.append([rating,new_string])
+                preprocessed_data.append([rating,new_string.strip()])
+
 
 
 #randomizing selections and writing train, test, human_oracle to file
@@ -101,11 +116,10 @@ training_dataframe = training_dataframe.sample(frac=1, random_state=7456, replac
 testing_dataframe = testing_dataframe.sample(frac=1, random_state=1245, replace=False)
 human_oracle_dataframe = human_oracle_dataframe.sample(frac=1, random_state=1245, replace=False)
 
-human_oracle_dataframe.to_csv(os.getcwd() + '\\for_human_oracle.csv', index=False, columns=[1])
-training_dataframe.to_csv(os.getcwd() + '\\clean_training.csv', index=False)
-testing_dataframe.to_csv(os.getcwd() + '\\clean_testing.csv', index=False)
-human_oracle_dataframe.to_csv(os.getcwd() + '\\clean_human_oracle.csv', index=False)
-
+human_oracle_dataframe.to_csv(os.getcwd() + '\\for_human_oracle_noprepro.csv', index=False, columns=[1])
+training_dataframe.to_csv(os.getcwd() + '\\clean_training_noprepro.csv', index=False)
+testing_dataframe.to_csv(os.getcwd() + '\\clean_testing_noprepro.csv', index=False)
+human_oracle_dataframe.to_csv(os.getcwd() + '\\clean_human_oracle_no_prepro.csv', index=False)
 
 
 
