@@ -134,7 +134,13 @@ Conclusion: Not a huge difference.
 
 ## Week of: 11/11/2024
 ### JRB:
-### EG:
+### EG: Experimented with changing the boundaries for positive, neutral, and negative reviews. When I changed it to a more extreme approach (favoring negative and positive), I saw a slight improvement in the accuracy of the model. The previous best was 52%, and I got 53%.
+![Screenshot 2024-11-13 161355](https://github.com/user-attachments/assets/af747d07-4993-4e0d-9272-8bb5da5492a4)
+
+(Note: The image says it uses balanced class weights, but it actually used extreme weights.)
+
+I also tried an approach that had more neutral than positive or negative. I got an accuracy of 59% which seems like an improvement. However, over 60% of the ratings were neutral, meaning that if the model just guessed neutral every time, it would be more accurate than the more sophisticated model. This shows that this approach isn't the way to go. 
+
 ### AC:
 
 
